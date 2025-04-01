@@ -8,9 +8,20 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Middleware
+// Middleware con CORS mejorado para permitir tanto el entorno de producción como desarrollo
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: function(origin, callback) {
+    const allowedOrigins = [
+      'https://blossomia-frontend.vercel.app',
+      'http://localhost:3000'
+    ];
+    // Permitir solicitudes sin origen (como aplicaciones móviles o curl) o desde orígenes permitidos
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true
 }));
