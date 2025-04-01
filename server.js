@@ -191,7 +191,7 @@ function simulateNewTips() {
   }
   
   // Programar la próxima actualización (entre 30 segundos y 2 minutos)
-  const nextUpdateTime = Math.floor(Math.random() * (120000 - 30000) + 30000);
+  const nextUpdateTime = Math.floor(Math.random() * (600000 - 300000) + 300000);
   setTimeout(simulateNewTips, nextUpdateTime);
 }
 
